@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://kir5lwf2lva0"]
+[gd_scene load_steps=30 format=3 uid="uid://kir5lwf2lva0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_welf6"]
 [ext_resource type="Texture2D" uid="uid://cjwjw3t8u6jle" path="res://assets/sprites/Warrior_Purple.png" id="2_edtsy"]
 [ext_resource type="AudioStream" uid="uid://djuvalrdwf1ax" path="res://assets/sounds/jump.wav" id="3_j6lqs"]
+[ext_resource type="PackedScene" uid="uid://blr76px1rejqd" path="res://scenes/killzone.tscn" id="4_jkdud"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh38x"]
 atlas = ExtResource("2_edtsy")
@@ -200,6 +201,9 @@ _data = {
 "jump_sound": SubResource("Animation_20517")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0osis"]
+size = Vector2(9, 14.5)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
@@ -212,7 +216,7 @@ sprite_frames = SubResource("SpriteFrames_nq040")
 animation = &"attack"
 autoplay = "idle"
 frame = 5
-frame_progress = 0.999469
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -226,5 +230,12 @@ libraries = {
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_j6lqs")
 bus = &"SFX"
+
+[node name="Killzone" parent="." instance=ExtResource("4_jkdud")]
+
+[node name="AttackCollision" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(13.5, -5.75)
+shape = SubResource("RectangleShape2D_0osis")
+disabled = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
