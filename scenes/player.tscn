@@ -1,7 +1,32 @@
-[gd_scene load_steps=18 format=3 uid="uid://kir5lwf2lva0"]
+[gd_scene load_steps=28 format=3 uid="uid://kir5lwf2lva0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_welf6"]
 [ext_resource type="Texture2D" uid="uid://cjwjw3t8u6jle" path="res://assets/sprites/Warrior_Purple.png" id="2_edtsy"]
+[ext_resource type="AudioStream" uid="uid://djuvalrdwf1ax" path="res://assets/sounds/jump.wav" id="3_j6lqs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh38x"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(0, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfui4"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(192, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcuor"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(384, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyar4"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(576, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_peowu"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(768, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovpi5"]
+atlas = ExtResource("2_edtsy")
+region = Rect2(960, 576, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qegu"]
 atlas = ExtResource("2_edtsy")
@@ -57,6 +82,29 @@ region = Rect2(960, 192, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nq040"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh38x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfui4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcuor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyar4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peowu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovpi5")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6qegu")
@@ -115,6 +163,43 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxmsm"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_20517"]
+resource_name = "jump_sound"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jump:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_421ts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jump:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g27q6"]
+_data = {
+"RESET": SubResource("Animation_421ts"),
+"jump_sound": SubResource("Animation_20517")
+}
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
@@ -124,10 +209,22 @@ script = ExtResource("1_welf6")
 position = Vector2(0, -7)
 scale = Vector2(0.215413, 0.214286)
 sprite_frames = SubResource("SpriteFrames_nq040")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.0258625
+frame = 5
+frame_progress = 0.999469
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_qxmsm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g27q6")
+}
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j6lqs")
+bus = &"SFX"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
