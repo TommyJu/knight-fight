@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var timer: Timer = $Timer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,8 +15,10 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	animation_player.play("death_sound")
 	Engine.time_scale = 0.5
 	body.get_node("CollisionShape2D").queue_free()
+	body.get_node("AnimatedSprite2D").flip_v = true
 	timer.start()
 	
 

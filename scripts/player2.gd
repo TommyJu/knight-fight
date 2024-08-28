@@ -42,12 +42,13 @@ func _physics_process(delta: float) -> void:
 				animated_sprite_2d.play("run")
 		else:
 			animated_sprite_2d.play("jump")
-	
-	# Handle attack
-	if Input.is_action_just_pressed("attack2"):
-		animated_sprite_2d.play("attack")
-		isAttacking = true
-		attack_collision.disabled = false
+		
+		# Handle attack
+		if Input.is_action_just_pressed("attack2"):
+			animated_sprite_2d.play("attack")
+			animation_player.play("attack_sound")
+			isAttacking = true
+			attack_collision.disabled = false
 	
 	# Apply movement
 	if direction:
