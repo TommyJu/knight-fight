@@ -255,10 +255,6 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
-[node name="Player2" parent="." instance=ExtResource("1_c6muo")]
-position = Vector2(525, 48)
-script = ExtResource("2_ubhea")
-
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_j6txh")
@@ -270,7 +266,7 @@ offset_right = 350.0
 offset_bottom = 62.0
 theme_override_fonts/font = ExtResource("2_2petv")
 theme_override_font_sizes/font_size = 8
-text = "You collected X coins"
+text = "You collected 0 coins"
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 2)
@@ -386,3 +382,7 @@ limit_bottom = 120
 
 [node name="Player" parent="Players" instance=ExtResource("1_c6muo")]
 position = Vector2(34, 50)
+
+[node name="Player2" parent="Players" instance=ExtResource("1_c6muo")]
+position = Vector2(525, 48)
+script = ExtResource("2_ubhea")
