@@ -1,9 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://s0xa3kgku5x3"]
+[gd_scene load_steps=6 format=3 uid="uid://s0xa3kgku5x3"]
 
 [ext_resource type="Script" path="res://scripts/take_coin.gd" id="1_cyaps"]
+[ext_resource type="AudioStream" uid="uid://cyl2xc2fo7kev" path="res://assets/sounds/power_up.wav" id="2_gp01k"]
+
+[sub_resource type="Animation" id="Animation_m8v0k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fi3cj"]
+resource_name = "death_sound"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb1c0"]
+_data = {
+"RESET": SubResource("Animation_m8v0k"),
+"death_sound": SubResource("Animation_fi3cj")
+}
 
 [node name="TakeCoin" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_cyaps")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bb1c0")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gp01k")
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
