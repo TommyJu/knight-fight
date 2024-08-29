@@ -15,6 +15,14 @@ func _ready() -> void:
 	player_2_round.text = "Player 2 Round Wins: " + str(RoundCount.round_player_2)
 	Engine.time_scale = 1
 
+func _process(delta: float) -> void:
+	pass
+
+func determine_win_by_time_p1() -> bool:
+	return score_player_1 > score_player_2
+
+func  determine_win_by_time_p2() -> bool:
+	return score_player_2 > score_player_1
 
 #func check_for_winner() -> void:
 	#if RoundCount.round_player_1 >= 3 || RoundCount.round_player_2 >=3:
@@ -52,3 +60,15 @@ func set_score_player_2(number:int) -> void:
 func reset_coins() -> void:
 	set_score_player_1(0)
 	set_score_player_2(0)
+
+
+func _on_timer_timeout() -> void:
+	if determine_win_by_time_p1():
+		add_round_player_1()
+	elif determine_win_by_time_p2():
+		add_round_player_2()
+	if RoundCount.check_for_winner():
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+	else:
+		get_tree().reload_current_scene()
+	

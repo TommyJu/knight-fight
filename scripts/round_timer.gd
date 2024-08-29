@@ -1,8 +1,10 @@
 extends Node
 
+const ROUND_LENGTH = 30
+
 @onready var time_remaining_label: Label = $TimeRemaining
 @onready var timer: Timer = $Timer
-var time_remaining = 30
+var time_remaining = ROUND_LENGTH
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.start()
