@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dst0k6dcexosy"]
+[gd_scene load_steps=25 format=3 uid="uid://dst0k6dcexosy"]
 
 [ext_resource type="Texture2D" uid="uid://bchnsdfenkhxk" path="res://assets/sprites/world_tileset.png" id="1_3x067"]
 [ext_resource type="PackedScene" uid="uid://kir5lwf2lva0" path="res://scenes/player.tscn" id="1_c6muo"]
@@ -328,6 +328,8 @@ _data = {
 "move": SubResource("Animation_mlbii")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_66nmo"]
+
 [node name="Game" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -527,5 +529,19 @@ offset_bottom = -55.0
 theme_override_fonts/font = ExtResource("2_2petv")
 theme_override_font_sizes/font_size = 16
 text = "Time: 30"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-55, 126)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_66nmo")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(612, 152)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_66nmo")
 
 [connection signal="timeout" from="RoundTimer/Timer" to="GameManager" method="_on_timer_timeout"]
