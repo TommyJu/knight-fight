@@ -10,6 +10,7 @@ const MINIMUM_SPEED = SPEED / 2
 @onready var game_manager: Node = %GameManager
 
 var isAttacking = false
+var isDamaged = false
 var current_speed = SPEED  
 
 func _physics_process(delta: float) -> void:
@@ -39,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = true
 		get_node("TakeCoin").set_scale(Vector2(-1, 1))
 	
-	if isAttacking == false:
+	if not isAttacking && not isDamaged:
 		# Play animations
 		if is_on_floor():
 			if direction == 0:
@@ -70,3 +71,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "attack":
 		isAttacking = false
 		attack_collision.disabled = true
+	if animated_sprite_2d.animation == "damage":
+		isDamaged = false
+		

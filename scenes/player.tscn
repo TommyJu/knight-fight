@@ -1,10 +1,12 @@
-[gd_scene load_steps=30 format=3 uid="uid://kir5lwf2lva0"]
+[gd_scene load_steps=34 format=3 uid="uid://kir5lwf2lva0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_welf6"]
 [ext_resource type="Texture2D" uid="uid://cjwjw3t8u6jle" path="res://assets/sprites/Warrior_Purple.png" id="2_edtsy"]
 [ext_resource type="AudioStream" uid="uid://djuvalrdwf1ax" path="res://assets/sounds/jump.wav" id="3_j6lqs"]
+[ext_resource type="Texture2D" uid="uid://cy4v47sv7y8p5" path="res://assets/sprites/Warrior_Red.png" id="3_l4awe"]
 [ext_resource type="AudioStream" uid="uid://bwbtu25ki6is3" path="res://assets/sounds/tap.wav" id="5_8smgq"]
 [ext_resource type="PackedScene" uid="uid://s0xa3kgku5x3" path="res://scenes/take_coin.tscn" id="5_v3uxr"]
+[ext_resource type="AudioStream" uid="uid://cyl2xc2fo7kev" path="res://assets/sounds/power_up.wav" id="7_6im1k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o85tu"]
 atlas = ExtResource("2_edtsy")
@@ -21,6 +23,10 @@ region = Rect2(768, 576, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_konve"]
 atlas = ExtResource("2_edtsy")
 region = Rect2(960, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xykv4"]
+atlas = ExtResource("3_l4awe")
+region = Rect2(0, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qegu"]
 atlas = ExtResource("2_edtsy")
@@ -92,6 +98,14 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xykv4")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -177,6 +191,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Damage:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_5d5ql"]
 resource_name = "attack_sound"
@@ -210,10 +236,27 @@ tracks/0/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_humpw"]
+resource_name = "damage_sound"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Damage:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g27q6"]
 _data = {
 "RESET": SubResource("Animation_421ts"),
 "attack_sound": SubResource("Animation_5d5ql"),
+"damage_sound": SubResource("Animation_humpw"),
 "jump_sound": SubResource("Animation_20517")
 }
 
@@ -229,10 +272,8 @@ script = ExtResource("1_welf6")
 position = Vector2(0, -7)
 scale = Vector2(0.215413, 0.214286)
 sprite_frames = SubResource("SpriteFrames_nq040")
-animation = &"attack"
+animation = &"damage"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -257,5 +298,8 @@ bus = &"SFX"
 position = Vector2(13.5, -5.75)
 shape = SubResource("RectangleShape2D_0osis")
 disabled = true
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_6im1k")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
