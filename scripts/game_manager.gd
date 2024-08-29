@@ -11,15 +11,10 @@ var score_player_2 = 0
 
 func _ready() -> void:
 	# Adjust the text for rounds
-<<<<<<< HEAD
 	player_1_round.text = "Player 1 Round Wins: " + str(RoundCount.round_player_1)
 	player_2_round.text = "Player 2 Round Wins: " + str(RoundCount.round_player_2)
-
-=======
-	player_1_round.text = "Player 1: " + str(RoundCount.round_player_1)
-	player_2_round.text = "Player 2: " + str(RoundCount.round_player_2)
 	Engine.time_scale = 1
->>>>>>> 4f4aec9b4b33723df966b2c978af776100dab057
+
 
 #func check_for_winner() -> void:
 	#if RoundCount.round_player_1 >= 3 || RoundCount.round_player_2 >=3:
@@ -27,23 +22,11 @@ func _ready() -> void:
 
 func add_round_player_1():
 	RoundCount.incrment_round_player_1()
-<<<<<<< HEAD
 	player_1_round.text = "Player 1 Round Wins: " + str(RoundCount.round_player_1)
-	check_for_winner()
+
 func add_round_player_2():
 	RoundCount.set("round_player_2", RoundCount.round_player_2 + 1)
 	player_2_round.text = "Player 2 Round Wins: " + str(RoundCount.round_player_2)
-	check_for_winner()
-=======
-	player_1_round.text = "Player 1: " + str(RoundCount.round_player_1)
-	#check_for_winner()
-	
-func add_round_player_2():
-	RoundCount.set("round_player_2", RoundCount.round_player_2 + 1)
-	player_2_round.text = "Player 2: " + str(RoundCount.round_player_2)
-	#check_for_winner()
->>>>>>> 4f4aec9b4b33723df966b2c978af776100dab057
-
 func add_point_player_1():
 	score_player_1 += 1
 	player_1_score.text = "Player 1 Coins: " + str(score_player_1)
