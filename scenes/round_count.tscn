@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyvtk6wb6e7hh"]
+
+[ext_resource type="Script" path="res://round_count.gd" id="1_vvd4c"]
+
+[node name="roundCount" type="Node2D"]
+script = ExtResource("1_vvd4c")
