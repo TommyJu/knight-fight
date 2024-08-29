@@ -7,6 +7,7 @@ extends Control
 func _ready() -> void:
 	winner_label.text = RoundCount.determine_winner()
 	RoundCount.reset_round()
+	v_box_container.get_node("PlayAgainButton").grab_focus()
 	
 
 
