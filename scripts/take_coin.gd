@@ -17,6 +17,7 @@ func _on_body_entered(body: Node2D) -> void:
 			Engine.time_scale = 0.5
 			body.get_node("CollisionShape2D").queue_free()
 			body.get_node("AnimatedSprite2D").flip_v = true
+			game_manager.add_round_player_2()
 			timer.start()
 	elif body == player_2:
 		game_manager.remove_point_player_2()
@@ -27,6 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 			Engine.time_scale = 0.3
 			body.get_node("CollisionShape2D").queue_free()
 			body.get_node("AnimatedSprite2D").flip_v = true
+			game_manager.add_round_player_1()
 			timer.start()
 
 func _on_timer_timeout() -> void:

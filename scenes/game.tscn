@@ -351,6 +351,24 @@ theme_override_fonts/font = ExtResource("2_2petv")
 theme_override_font_sizes/font_size = 8
 text = "Player 2 Coins: 0"
 
+[node name="Player2Round" type="Label" parent="GameManager"]
+offset_left = 361.0
+offset_top = 133.0
+offset_right = 465.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("2_2petv")
+theme_override_font_sizes/font_size = 8
+text = "Player2:  0"
+
+[node name="Player1Round" type="Label" parent="GameManager"]
+offset_left = 119.0
+offset_top = 144.0
+offset_right = 223.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("2_2petv")
+theme_override_font_sizes/font_size = 8
+text = "Player 1: 0"
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 2)
 tile_set = SubResource("TileSet_f73xs")
