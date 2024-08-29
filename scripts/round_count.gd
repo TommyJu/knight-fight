@@ -29,3 +29,11 @@ func set_round_player_2(number:int) -> void:
 func reset_round() -> void:
 	set_round_player_1(0)
 	set_round_player_2(0)
+
+func determine_winner() -> String:
+	if round_player_1 > round_player_2:
+		return "Player 1 WINS"
+	elif round_player_2 > round_player_1:
+		return "Player 2 WINS"
+	else:
+		return "no Winner"

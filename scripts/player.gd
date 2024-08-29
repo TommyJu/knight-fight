@@ -14,7 +14,7 @@ var current_speed = SPEED
 
 func _physics_process(delta: float) -> void:
 	# Adjust movment speed
-	if game_manager.score_player_2 < 10:
+	if game_manager.score_player_1 < 10:
 		current_speed = SPEED * (1 - (0.05 * game_manager.score_player_1))
 	else:
 		current_speed = MINIMUM_SPEED
