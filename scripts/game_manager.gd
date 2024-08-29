@@ -8,15 +8,18 @@ extends Node
 
 var score_player_1 = 0
 var score_player_2 = 0
-var round_player_1 = 0
-var round_player_2 = 0
+
+func _ready() -> void:
+	# Adjust the text for rounds
+	player_1_round.text = "Player 1: " + str(RoundCount.round_player_1)
+	player_2_round.text = "Player 2: " + str(RoundCount.round_player_2)
 
 func add_round_player_1():
-	round_player_1 += 1
-	player_1_round.text = "Player 1: " + str(round_player_1)
+	RoundCount.incrment_round_player_1()
+	player_1_round.text = "Player 1: " + str(RoundCount.round_player_1)
 func add_round_player_2():
-	round_player_2 += 1
-	player_2_round.text = "Player 2: " + str(round_player_2)
+	RoundCount.set("round_player_2", RoundCount.round_player_2 + 1)
+	player_2_round.text = "Player 2: " + str(RoundCount.round_player_2)
 
 func add_point_player_1():
 	score_player_1 += 1
@@ -33,3 +36,13 @@ func add_point_player_2():
 func remove_point_player_2():
 	score_player_2 -= 1
 	player_2_score.text = "Player 2 Coins: " + str(score_player_2)
+
+func set_score_player_1(number:int) -> void:
+	score_player_1 = number
+	
+func set_score_player_2(number:int) -> void:
+	score_player_2 = number
+
+func reset_coins() -> void:
+	set_score_player_1(0)
+	set_score_player_2(0)

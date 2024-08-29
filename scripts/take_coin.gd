@@ -42,4 +42,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
+	game_manager.reset_coins()
+	
 	get_tree().reload_current_scene()
