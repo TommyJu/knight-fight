@@ -20,5 +20,5 @@ func add_point_player_2():
 	player_2_score.text = "Player 2 Coins: " + str(score_player_2)
 	
 func remove_point_player_2():
-	score_player_1 -= 1
+	score_player_2 -= 1
 	player_2_score.text = "Player 2 Coins: " + str(score_player_2)

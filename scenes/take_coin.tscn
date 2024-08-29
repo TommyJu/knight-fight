@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/take_coin.gd" id="1_cyaps"]
 
 [node name="TakeCoin" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_cyaps")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
