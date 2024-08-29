@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dst0k6dcexosy"]
+[gd_scene load_steps=24 format=3 uid="uid://dst0k6dcexosy"]
 
 [ext_resource type="Texture2D" uid="uid://bchnsdfenkhxk" path="res://assets/sprites/world_tileset.png" id="1_3x067"]
 [ext_resource type="PackedScene" uid="uid://kir5lwf2lva0" path="res://scenes/player.tscn" id="1_c6muo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b12xdcdc0cvyp" path="res://scenes/platform.tscn" id="3_jrebk"]
 [ext_resource type="PackedScene" uid="uid://dcut71u17rmud" path="res://scenes/coin.tscn" id="4_pb8na"]
 [ext_resource type="PackedScene" uid="uid://bo7wav7msit7g" path="res://scenes/enemy.tscn" id="6_glpij"]
+[ext_resource type="Script" path="res://scripts/round_timer.gd" id="9_0pq3t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_libd3"]
 texture = ExtResource("1_3x067")
@@ -509,3 +510,18 @@ script = ExtResource("2_ubhea")
 
 [node name="Enemy" parent="." instance=ExtResource("6_glpij")]
 position = Vector2(279, 198)
+
+[node name="RoundTimer" type="Node" parent="."]
+script = ExtResource("9_0pq3t")
+
+[node name="Timer" type="Timer" parent="RoundTimer"]
+wait_time = 30.0
+autostart = true
+
+[node name="TimeRemaining" type="Label" parent="RoundTimer"]
+offset_left = 261.0
+offset_top = -64.0
+offset_right = 301.0
+offset_bottom = -41.0
+theme_override_fonts/font = ExtResource("2_2petv")
+theme_override_font_sizes/font_size = 16
