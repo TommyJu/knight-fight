@@ -8,6 +8,9 @@ extends Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _on_body_entered(body: Node2D) -> void:
+	body.isDamaged = true
+	body.get_node("AnimatedSprite2D").play("damage")
+	body.get_node("AnimationPlayer").play("damage_sound")
 	if body == player_1:
 		game_manager.remove_point_player_1()
 		game_manager.add_point_player_2()
@@ -30,6 +33,12 @@ func _on_body_entered(body: Node2D) -> void:
 			body.get_node("AnimatedSprite2D").flip_v = true
 			game_manager.add_round_player_1()
 			timer.start()
+			
+#func _on_animated_sprite_2d_animation_finished() -> void:
+	#if player_1.get_node("AnimatedSprite2D").animation == "damage":
+		#player_1.isDamaged = false
+	#if player_2.get_node("AnimatedSprite2D").animation == "damage":
+		#player_2.isDamaged = false
 
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
