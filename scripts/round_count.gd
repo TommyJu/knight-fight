@@ -1,5 +1,7 @@
 extends Node2D
 
+const MAX_ROUNDS = 3
+
 var round_player_1 = 0
 var round_player_2 = 0
 
@@ -29,6 +31,9 @@ func set_round_player_2(number:int) -> void:
 func reset_round() -> void:
 	set_round_player_1(0)
 	set_round_player_2(0)
+
+func check_for_winner() -> bool:
+	return RoundCount.round_player_1 >= MAX_ROUNDS || RoundCount.round_player_2 >=MAX_ROUNDS
 
 func determine_winner() -> String:
 	if round_player_1 > round_player_2:

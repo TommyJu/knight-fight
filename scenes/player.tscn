@@ -220,13 +220,13 @@ tracks/0/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_20517"]
-resource_name = "jump_sound"
+[sub_resource type="Animation" id="Animation_humpw"]
+resource_name = "damage_sound"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Jump:playing")
+tracks/0/path = NodePath("Damage:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -236,13 +236,13 @@ tracks/0/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_humpw"]
-resource_name = "damage_sound"
+[sub_resource type="Animation" id="Animation_20517"]
+resource_name = "jump_sound"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Damage:playing")
+tracks/0/path = NodePath("Jump:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {

@@ -20,19 +20,21 @@ func _on_body_entered(body: Node2D) -> void:
 			Engine.time_scale = 0.5
 			body.get_node("CollisionShape2D").queue_free()
 			body.get_node("AnimatedSprite2D").flip_v = true
-			game_manager.add_round_player_2()
 			timer.start()
+			game_manager.add_round_player_2()
+			
 	elif body == player_2:
 		game_manager.remove_point_player_2()
 		game_manager.add_point_player_1()
 		# If the player dies
 		if game_manager.score_player_2 < 0:
 			animation_player.play("death_sound")
-			Engine.time_scale = 0.3
+			Engine.time_scale = 0.5
 			body.get_node("CollisionShape2D").queue_free()
 			body.get_node("AnimatedSprite2D").flip_v = true
-			game_manager.add_round_player_1()
 			timer.start()
+			game_manager.add_round_player_1()
+			
 			
 #func _on_animated_sprite_2d_animation_finished() -> void:
 	#if player_1.get_node("AnimatedSprite2D").animation == "damage":
@@ -40,8 +42,11 @@ func _on_body_entered(body: Node2D) -> void:
 	#if player_2.get_node("AnimatedSprite2D").animation == "damage":
 		#player_2.isDamaged = false
 
+
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
 	game_manager.reset_coins()
-	
-	get_tree().reload_current_scene()
+	if RoundCount.check_for_winner():
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+	else:
+		get_tree().reload_current_scene()
