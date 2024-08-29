@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_welf6"]
 [ext_resource type="Texture2D" uid="uid://cjwjw3t8u6jle" path="res://assets/sprites/Warrior_Purple.png" id="2_edtsy"]
 [ext_resource type="AudioStream" uid="uid://djuvalrdwf1ax" path="res://assets/sounds/jump.wav" id="3_j6lqs"]
-[ext_resource type="PackedScene" uid="uid://blr76px1rejqd" path="res://scenes/killzone.tscn" id="4_jkdud"]
 [ext_resource type="AudioStream" uid="uid://bwbtu25ki6is3" path="res://assets/sounds/tap.wav" id="5_8smgq"]
+[ext_resource type="PackedScene" uid="uid://s0xa3kgku5x3" path="res://scenes/take_coin.tscn" id="5_v3uxr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o85tu"]
 atlas = ExtResource("2_edtsy")
@@ -151,22 +151,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxmsm"]
 radius = 5.0
 
-[sub_resource type="Animation" id="Animation_20517"]
-resource_name = "jump_sound"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Jump:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_421ts"]
 length = 0.001
 tracks/0/type = "value"
@@ -201,6 +185,22 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Attack:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_20517"]
+resource_name = "jump_sound"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Jump:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -247,15 +247,15 @@ libraries = {
 stream = ExtResource("3_j6lqs")
 bus = &"SFX"
 
-[node name="Killzone" parent="." instance=ExtResource("4_jkdud")]
-
-[node name="AttackCollision" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(13.5, -5.75)
-shape = SubResource("RectangleShape2D_0osis")
-disabled = true
-
 [node name="Attack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8smgq")
 bus = &"SFX"
+
+[node name="TakeCoin" parent="." instance=ExtResource("5_v3uxr")]
+
+[node name="AttackCollision" type="CollisionShape2D" parent="TakeCoin"]
+position = Vector2(13.5, -5.75)
+shape = SubResource("RectangleShape2D_0osis")
+disabled = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

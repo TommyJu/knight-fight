@@ -5,7 +5,7 @@ const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var attack_collision: CollisionShape2D = $Killzone/AttackCollision
+@onready var attack_collision: CollisionShape2D = $TakeCoin/AttackCollision
 
 
 var isAttacking = false
@@ -27,11 +27,11 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	# Flip the sprite and attack collision
 	if direction > 0:
-		get_node("Killzone").set_scale(Vector2(1, 1))
+		get_node("TakeCoin").set_scale(Vector2(1, 1))
 		animated_sprite_2d.flip_h = false
 	elif direction < 0:
 		animated_sprite_2d.flip_h = true
-		get_node("Killzone").set_scale(Vector2(-1, 1))
+		get_node("TakeCoin").set_scale(Vector2(-1, 1))
 	
 	if isAttacking == false:
 		# Play animations
