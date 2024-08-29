@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cjwjw3t8u6jle" path="res://assets/sprites/Warrior_Purple.png" id="2_edtsy"]
 [ext_resource type="AudioStream" uid="uid://djuvalrdwf1ax" path="res://assets/sounds/jump.wav" id="3_j6lqs"]
 [ext_resource type="AudioStream" uid="uid://bwbtu25ki6is3" path="res://assets/sounds/tap.wav" id="5_8smgq"]
-[ext_resource type="PackedScene" path="res://scenes/take_coin.tscn" id="5_v3uxr"]
+[ext_resource type="PackedScene" uid="uid://s0xa3kgku5x3" path="res://scenes/take_coin.tscn" id="5_v3uxr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o85tu"]
 atlas = ExtResource("2_edtsy")
